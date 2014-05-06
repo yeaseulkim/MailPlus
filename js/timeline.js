@@ -60,6 +60,8 @@ y_render.append("text")
     .call(function()
       {
         var bargroup = this.append("g")
+          .attr("class", "bargroup");
+          
         bargroup.append("rect")
         .attr("class", "inbar")
         .attr("x", function(d) { return x(d.date); })

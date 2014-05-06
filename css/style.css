@@ -32,13 +32,17 @@ td
 	fill:#eeb211;
 }
 
-.inbar:hover {
+.bargroup:hover rect{
+	fill:brown;
+}
+
+/*.inbar:hover {
   fill: brown;
 }
 
 .outbar:hover {
 	fill:brown;
-}
+}*/
 
 .axis {
   font: 10px sans-serif;
