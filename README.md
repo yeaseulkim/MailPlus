@@ -2,6 +2,10 @@ Mail+
 =============
 Mail+ is a set of visualization tools embedded in Gmail.
 
+Online Demo
+----------------
+Click [here](http://yeaseul.github.io/MailPlus/) to see our interactive prototype.
+
 Running Instructions
 ----------------
 1. Clone this Git repository.
