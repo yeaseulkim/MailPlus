@@ -17,7 +17,12 @@ var xAxis = d3.svg.axis()
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
-    .ticks(5);
+    .ticks(5)
+    .tickFormat(function (d) { 
+        var formater = d3.format("0");
+        if (d < 0) d = -d; // No nagative labels
+        return formater(d);
+    });;
 
 var svg = d3.select("#timeline").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -40,6 +45,7 @@ var y_render = svg.append("g")
 
 y_render.append("text")
       //.attr("transform", "rotate(-90)")
+      .attr("id", "in_label")
       .attr("x", 6)
       .attr("y", 0)
       .attr("dy", ".71em")
@@ -48,6 +54,7 @@ y_render.append("text")
 
 y_render.append("text")
       //.attr("transform", "rotate(-90)")
+      .attr("id", "out_label")
       .attr("x", 6)
       .attr("y", height)
       .attr("dy", ".71em")

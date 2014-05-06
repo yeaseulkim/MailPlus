@@ -26,11 +26,17 @@ td
 .inbar {
   fill: steelblue;
 }
-
 .outbar
 {
 	fill:#eeb211;
 }
+#in_label {
+	fill: steelblue;
+}
+#out_label {
+	fill:#eeb211;
+}
+
 
 .bargroup:hover rect{
 	fill:brown;
