@@ -8,3 +8,17 @@ margin-bottom: 0px;
 margin-left: 0px;
 }
 
+table
+{
+	border-spacing:0px;
+}
+
+tbody
+{
+	vertical-align: top;
+}
+
+td
+{
+	padding:0px;
+}
