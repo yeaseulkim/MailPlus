@@ -1,9 +1,9 @@
 // JS for timeline view
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 500 - margin.left - margin.right,
+    width = 1084 - margin.left - margin.right,
     height = 200 - margin.top - margin.bottom;
-var columnwidth = 15;
+var columnwidth = 1;
 
 var x = d3.time.scale()
     .range([0, width]);
@@ -11,7 +11,7 @@ var x = d3.time.scale()
 var y = d3.scale.linear()
     .range([height, 0]);
 
-var parse = d3.time.format("%Y-%m-%d").parse;
+var parse = d3.time.format("%m/%d/%y").parse;
 
 var xAxis = d3.svg.axis()
     .scale(x)
