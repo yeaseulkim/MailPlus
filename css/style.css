@@ -23,12 +23,21 @@ td
 	padding:0px;
 }
 
-.bar {
+.inbar {
   fill: steelblue;
 }
 
-.bar:hover {
+.outbar
+{
+	fill:#eeb211;
+}
+
+.inbar:hover {
   fill: brown;
+}
+
+.outbar:hover {
+	fill:brown;
 }
 
 .axis {
