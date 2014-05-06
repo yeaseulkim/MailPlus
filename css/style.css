@@ -37,18 +37,16 @@ td
 	fill:#eeb211;
 }
 
+#timeline {
+	max-width: 1040px;
+	overflow: scroll;
+}
 
 .bargroup:hover rect{
 	fill:brown;
 }
 
-/*.inbar:hover {
-  fill: brown;
-}
 
-.outbar:hover {
-	fill:brown;
-}*/
 
 .axis {
   font: 10px sans-serif;

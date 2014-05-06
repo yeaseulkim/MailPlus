@@ -2,7 +2,7 @@
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 1084 - margin.left - margin.right,
-    height = 200 - margin.top - margin.bottom;
+    height = 170 - margin.top - margin.bottom;
 var columnwidth = 1;
 
 var x = d3.time.scale()
@@ -33,6 +33,8 @@ var svg = d3.select("#timeline").append("svg")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
 
 d3.tsv("js/timeline_data.tsv", type, function(error, data) {
   x.domain([data[data.length-1].date, data[0].date]);
