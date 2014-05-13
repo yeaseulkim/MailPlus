@@ -12,7 +12,7 @@ var columnwidth_thin = 1,
 var parse = d3.time.format("%m/%d/%y").parse;
 
 var date1 = parse("04/21/14")
-var date2 = parse("05/05/14")
+var date2 = parse("05/04/14")
 
 
 d3.tsv("js/timeline_data.tsv", type, function(error, data) {
@@ -34,16 +34,52 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
 
-  var x = d3.time.scale()
-      .range([0, width]);
+  var x_pan1 = d3.time.scale()
+      .range([0, Scale.pan1])
+      .domain([date_min,date1]);
 
-  var y = d3.scale.linear()
-      .range([height, 0]);
+  var x_zoom = d3.time.scale()
+      .range([Scale.pan1, Scale.pan1+Scale.zoom])
+      .domain([date1,date2]);
 
-  var xAxis = d3.svg.axis()
-      .scale(x)
+  var x_pan2 = d3.time.scale()
+      .range([Scale.pan1+Scale.zoom, Scale.sum])
+      .domain([date2,date_max]);
+
+  var Ax_pan1 = d3.svg.axis()
+      .scale(x_pan1)
       .orient("bottom")
       .ticks(2);
+
+  var Ax_zoom = d3.svg.axis()
+      .scale(x_zoom)
+      .orient("bottom")
+      .ticks(2);
+
+  var Ax_pan2 = d3.svg.axis()
+      .scale(x_pan2)
+      .orient("bottom")
+      .ticks(2);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(Ax_pan1);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(Ax_zoom);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(Ax_pan2);
+
+
+  var y = d3.scale.linear()
+      .range([height, 0])
+      .domain([ (-1) * d3.max(data, function(d) { return d.outgoing; }), d3.max(data, function(d) { return d.incoming; })]);
 
   var yAxis = d3.svg.axis()
       .scale(y)
@@ -51,17 +87,10 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
       .ticks(5)
       .tickFormat(function (d) { 
           var formater = d3.format("0");
-          if (d < 0) d = -d; // No nagative labels
+          if (d < 0) d = -d; // No negative labels
           return formater(d);
       });;
 
-  x.domain([data[data.length-1].date, data[0].date]);
-  y.domain([ (-1) * d3.max(data, function(d) { return d.outgoing; }), d3.max(data, function(d) { return d.incoming; })]);
-
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
 
   var y_render = svg.append("g")
       .attr("class", "y axis")
@@ -88,31 +117,34 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
   svg.selectAll(".bar")
       .data(data)
     .enter()
-    .call(function()
-      {
+    .call(function(data)
+      { 
         var bargroup = this.append("g")
           .attr("class", "bargroup");
-          
+
         bargroup.append("rect")
         .attr("class", "inbar")
-        .attr("x", function(d) { return x(d.date); })
+        .attr("x", function(d) { return x_pan2(d.date); })
         .attr("width", columnwidth_thin)
         .attr("y", function(d) { return y(d.incoming); })
         .attr("height", function(d) { return y(0) - y(d.incoming); });
 
         bargroup.append("rect")
         .attr("class", "outbar")
-        .attr("x", function(d) { return x(d.date); })
+        .attr("x", function(d) { return x_pan2(d.date); })
         .attr("width", columnwidth_thin)
         .attr("y", function(d) { return y(0); })
         .attr("height", function(d) { return y( (-1)*d.outgoing) - y(0); });
+        
       });
 
-
-    
     
 
 });
+
+function getBarPos (date) {
+  // console.log(date);
+}
 
 function getScale(days, thin, thick)
 {
@@ -140,15 +172,6 @@ function getDiffDays (dx, dy) {
   return diffDays;
 }
 
-function drawbars(selection)
-{
-  selection.append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.date); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.incoming); })
-      .attr("height", function(d) { return y(0) - y(d.incoming); });
-}
 
 function type(d) {
   d.date = parse(d.date);
