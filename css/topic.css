@@ -1,0 +1,77 @@
+body
+{
+background-color: #f5f5f5;
+margin: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+margin-left: 0px;
+}
+
+table
+{
+	border-spacing:0px;
+}
+
+tbody
+{
+	vertical-align: top;
+}
+
+td
+{
+	padding:0px;
+}
+
+.inbar {
+  fill: steelblue;
+}
+.outbar
+{
+	fill:#eeb211;
+}
+#in_label {
+	fill: steelblue;
+}
+#out_label {
+	fill:#eeb211;
+}
+
+#timeline {
+	max-width: 1040px;
+	overflow: scroll;
+}
+
+.bargroup:hover rect{
+	fill:brown;
+}
+
+
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+#email {
+	float: left;
+	height:500px;
+	border-bottom: 1px black;
+}
+
+#accordion {
+	float: right;
+	background: white;
+	width: 250px;
+	height:600px;
+}
