@@ -62,9 +62,3 @@ td
 .x.axis path {
   display: none;
 }
-
-#accordion {
-	float: right;
-	width: 250px;
-	height:600px;
-}

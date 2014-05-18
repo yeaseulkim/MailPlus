@@ -6,6 +6,9 @@ margin-top: 0px;
 margin-right: 0px;
 margin-bottom: 0px;
 margin-left: 0px;
+font-family:arial,sans-serif;
+font-size:12px;
+
 }
 
 table
@@ -65,13 +68,35 @@ td
 
 #email {
 	float: left;
-	height:500px;
+	width: 800px;
+	height:525px;
 	border-bottom: 1px black;
 }
 
-#accordion {
+#right {
 	float: right;
+	width:260px;
+	height: 600px;
 	background: white;
-	width: 250px;
-	height:600px;
+	padding-right: 10px;
+}
+
+#accordion {
+	background: white;
+	height:auto;
+}
+
+#relevant_header {
+	padding: 30px 0px;
+	background: #ffffff;
+}
+#current_topic {
+	margin:0;
+	padding:12px 2px;
+	color: #fff;
+	background: #999999
+	
+}
+.content {
+	font-size: 12px;
 }
