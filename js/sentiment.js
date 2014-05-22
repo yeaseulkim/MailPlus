@@ -6,7 +6,7 @@
 ----------------------------------------------------------------*/
 //variable for inner and outer
 var width = 900, height = 500, radius = Math.min(width, height)/2 - 70;
-var path = ["data/data_outer.csv", "data/data_inner.csv"];
+var path = ["./data_outer.csv", "./data_inner.csv"];
 var pie = d3.layout.pie().sort(null).value(function(d) { return d.count; });
 
 //variable for outer
@@ -52,7 +52,7 @@ function visualize(){
 			.attr("transform", function(d) { return "translate(" + arc_outer.centroid(d) + ")"; })
 			.attr("dy", ".35em")
 			.style("text-anchor", "middle")
-			.text(function(d) { if (d.data.sentiment == "positive") {return d.data.proportion + "%";} });
+			.text(function(d) { if (d.data.sentiment == "positive") {return "66%";} });
 
 		//Draw inner
 		d3.csv(path[1], function(error, data) {
@@ -71,7 +71,7 @@ function visualize(){
 				.attr("transform", function(d) { return "translate(" + arc_inner.centroid(d) + ")"; })
 				.attr("dy", ".35em")
 				.style("text-anchor", "middle")
-				.text(function(d) { if (d.data.sentiment == "positive") {return d.data.proportion + "%";} });
+				.text(function(d) { if (d.data.sentiment == "positive") {return "68%";} });
 		});
 
 	});
@@ -79,10 +79,10 @@ function visualize(){
 
 function draw_Legend(){
 	$("#contents").remove();
-	var tagInsert = $('<div id="contents"><div id="legend"><img src="image/legend.png" alt="legend"/></div></div>');
+	var tagInsert = $('<div id="contents"><div id="legend"><img src="/imgs/legend.png" alt="legend"/></div></div>');
 	/*<div id="contents">
 		<div id="legend">
-			<img src="image/legend.png" alt="legend"/>
+			<img src="/imgs/legend.png" alt="legend"/>
 		</div>
 	</div>*/
 	tagInsert.appendTo("#main-right");
@@ -90,18 +90,18 @@ function draw_Legend(){
 
 function draw_Group(){
 	$("#contents").remove();
-	var tagInsert = $('<div id="contents"> <div class="menu"><img src="image/menu1_off.png"/></div> <div class="menu"><img src="image/menu2_off.png"/> </div>');
+	var tagInsert = $('<div id="contents"> <div class="menu"><img src="/imgs/menu1_off.png"/></div> <div class="menu"><img src="/imgs/menu2_off.png"/> </div>');
 	tagInsert.appendTo("#main-right");
-	var tagInsert = $('<div class="group_clear"> Most positive groups </div><div class="group"> <img src="image/g1_off.png"/> </div><div class="group"> <img src="image/g2_off.png"/> </div><div class="group"> <img src="image/g3_off.png"/> </div><div class="group"> <img src="image/g4_off.png"/> </div>');
+	var tagInsert = $('<div class="group_clear"> Most positive groups </div><div class="group"> <img src="/imgs/g1_off.png"/> </div><div class="group"> <img src="/imgs/g2_off.png"/> </div><div class="group"> <img src="/imgs/g3_off.png"/> </div><div class="group"> <img src="/imgs/g4_off.png"/> </div>');
 	tagInsert.appendTo("#contents");	
 	/*<div id="contents">
-		<div class="menu"> <img src="image/menu1_off.png"/> </div> 
-		<div class="menu"> <img src="image/menu2_off.png"/> </div>
+		<div class="menu"> <img src="/imgs/menu1_off.png"/> </div> 
+		<div class="menu"> <img src="/imgs/menu2_off.png"/> </div>
 		<div class="group_clear"> Most positive groups </div>
-		<div class="group"> <img src="image/g1_off.png"/> </div>
-		<div class="group"> <img src="image/g2_off.png"/> </div>
-		<div class="group"> <img src="image/g3_off.png"/> </div>
-		<div class="group"> <img src="image/g4_off.png"/> </div>
+		<div class="group"> <img src="/imgs/g1_off.png"/> </div>
+		<div class="group"> <img src="/imgs/g2_off.png"/> </div>
+		<div class="group"> <img src="/imgs/g3_off.png"/> </div>
+		<div class="group"> <img src="/imgs/g4_off.png"/> </div>
 	</div>*/
 
 }
