@@ -6,36 +6,86 @@
 -->
 
 <html>
-	<head>
-		<!--header information -->
-		<title> e-mail sentiment analysis visualization </title>
-		<meta charset="utf-8">
+<head>
+	<title> Mail+ </title>
+	<meta charset="utf-8">
 		<!--css-->
 		<link href="sentiment.css" type="text/css" rel="stylesheet" />	
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
 		<!--js-->
 		<script type="text/javascript" src="lib/d3/d3.v3.js"></script>
 		<script type="text/javascript" src="lib/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src="lib/sentiment.js"></script>
-	</head>
-	<body>
-		<div id="head"> 
-			<div id="head_left"> </div>
-			<div id="head_right"> </div>
-		</div>
-		<div id="main">
-			<div id="main-left"> </div>
-			<div id="main-right">
-<!--			<div id="contents">
-					<div class="menu"> <img src="image/menu1_off.png"/> </div> 
-					<div class="menu"> <img src="image/menu2_off.png"/> </div>
-					<div class="group_clear"> Most positive groups </div>
-					<div class="group"> <img src="image/g1_off.png"/> </div>
-					<div class="group"> <img src="image/g2_off.png"/> </div>
-					<div class="group"> <img src="image/g3_off.png"/> </div>
-					<div class="group"> <img src="image/g4_off.png"/> </div>
-				</div>-->
-			</div>
-		</div>
-		<div id="bottom"> </div>
-	</body>
+</head>
+
+<body>
+
+	<table id="background">
+		<tr>
+			<!-- left side bar -->
+			<td>
+				<table id="left_side">
+					<tr id="Google_Logo">
+						<td> <a href="/index.html"> <img src="/imgs/background/background_01_01.gif"/>  </a> </td>
+					</tr>
+					<tr>
+						<td> <img src="/imgs/background/background_01_02.gif"/> </td>
+					</tr>
+					<tr>
+						<td> <img src="/imgs/background/background_01_04.gif"/> </td>
+					</tr>
+					<tr id="Inbox">
+						<td> <a href="/index.html"> <img src="/imgs/background/background_01_05.gif"/>  </a> </td>
+					</tr>
+					<tr>
+						<td> <img src="/imgs/background/background_01_06.gif"/> </td>
+					</tr>
+				</table>
+				
+			</td>
+			
+			<!-- right -->
+			<td>
+				<table id="top_area">
+					<tr>
+						<td>
+							<img src="/imgs/background/background_02_01.gif"/>
+							<img src="/imgs/background/background_02_02.gif" width="80"/>
+							<a href="/sentiment/index.html"> <img src="/imgs/sentimentIcon.png" height="40"/></a> 
+							<img src="/imgs/background/background_02_03.gif"/>
+						</td>
+					</tr>
+					<tr>
+						<td> <img src="/imgs/background/background_02_04.gif"/></td>
+					</tr>
+				</table>
+				
+				<table id="emails">
+					<tr>
+						<td>
+							<div id="main-right"> </div>
+						</td>
+					</tr>
+
+				</table>
+
+				<table id="copyright">
+					<tr>
+						<td>
+							<img src="/imgs/background/background_04.gif">
+						</td>
+					</tr>
+				</table>
+
+			</td>
+			
+			
+		</tr>
+	</table>
+
+
+
+</body>
 </html>
+
+
