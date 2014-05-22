@@ -21,6 +21,12 @@ tbody
 td
 {
 	padding:0px;
+	line-height: 0;
+}
+
+td img 
+{ 
+	vertical-align: middle; 
 }
 
 .inbar {
