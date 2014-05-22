@@ -1,0 +1,90 @@
+/* 
+/ Author : Yeaseul Kim
+/ Project : E-mail sentiment visualization
+/ Last modified at: 2013.05.17
+*/
+
+body {
+	padding: 0px;
+	margin: 0px;
+	font: 11px sans-serif;
+	background-color:#f5f5f5;
+}
+
+#head{
+	position: relative;
+	left:0px; top:0px;
+	background-image: url("image/header_bg.png");
+	height: 108px;
+	width: 100%;
+}
+	#head_left{
+		position: absolute;
+		left:30px; top:15px;
+		height: 85px;
+		width: 822px;
+		background-image: url("image/header_left.png");
+		background-repeat:no-repeat;
+	}
+	#head_right{
+		position: absolute;
+		right:0px; top:0px;
+		height: 50px;
+		width: 395px;
+		background-image: url("image/header_right.png");
+		background-repeat:no-repeat;
+	}
+
+
+#main{
+	position: relative;	
+}
+
+	#main-left{
+		position: absolute;
+		left: 0px;
+		width: 202px;
+		height: 400px;	
+		background-image: url("image/left_bg.png");
+		background-repeat:no-repeat;
+	}
+	#main-right{
+		position: absolute;
+		left: 202px;
+		width: 900px;
+		height: 500px;
+	}
+	
+		#contents{
+			position: absolute;
+			left: 530px;
+			top: 20px;
+			width: 330px;
+			height: 460px;
+			/*background-color: #eee;*/
+		}
+		
+#legend{
+	position: absolute;
+	top: 270px;
+	left: 0px;
+}
+
+.menu{
+	padding-left: 5px;
+	padding-top: 10px;
+	padding-right: 5px;
+	float: left;
+}
+
+.group_clear{
+	font-size: 15px;
+	padding-left: 5px;
+	padding-top: 15px;
+	padding-bottom: 5px;
+	clear: left;
+}
+		
+.arc path {
+  stroke: #fff;
+}
