@@ -29,6 +29,12 @@ td img
 	vertical-align: middle; 
 }
 
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
 .inbar {
   fill: steelblue;
 }
@@ -45,7 +51,7 @@ td img
 
 #timeline {
 	max-width: 1040px;
-	overflow: scroll;
+	/*overflow: scroll;*/
 }
 
 .bargroup:hover rect{
