@@ -3,7 +3,7 @@
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 1084 - margin.left - margin.right,
     height = 170 - margin.top - margin.bottom;
-var columnwidth = 1;
+var columnwidth = 1.5;
 
 var x = d3.time.scale()
     .range([0, width]);
@@ -15,8 +15,7 @@ var parse = d3.time.format("%m/%d/%y").parse;
 
 var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom")
-    .ticks(2);
+    .orient("bottom");
 
 var yAxis = d3.svg.axis()
     .scale(y)
@@ -28,9 +27,20 @@ var yAxis = d3.svg.axis()
         return formater(d);
     });;
 
+var zoom = d3.behavior.zoom()
+      .x(x)
+      .scaleExtent([1, 10])
+      .on("zoom", zoomed);
+
+function zoomed() {
+  svg.select(".x.axis").call(xAxis);
+  svg.attr("transform", "translate(" + d3.event.translate[0] + ",0)scale(" + d3.event.scale + ", 1)");
+}
+
 var svg = d3.select("#timeline").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .call(zoom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -90,35 +100,10 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
         .attr("height", function(d) { return y( (-1)*d.outgoing) - y(0); });
       });
 
-
-  transition();
-  setInterval(transition, 10000);
-
-  var domain0 = [+new Date(2012, 10, 1), +new Date(2014, 5, 5)],
-      domain1 = [+new Date(2014, 1, 1), +new Date(2014, 1, 2)];
-
-  function transition() {
-    gAxis.transition().duration(8500).tween("axis", function(d, i) {
-      var i = d3.interpolate(domain0, domain1);
-      return function(t) {
-        x.domain(i(t));
-        gAxis.call(xAxis);
-      }
-    });
-  }
  
 
 });
 
-function drawbars(selection)
-{
-  selection.append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.date); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.incoming); })
-      .attr("height", function(d) { return y(0) - y(d.incoming); });
-}
 
 function type(d) {
   d.date = parse(d.date);
