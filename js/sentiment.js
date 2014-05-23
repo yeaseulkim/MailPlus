@@ -6,7 +6,7 @@
 ----------------------------------------------------------------*/
 //variable for inner and outer
 var width = 900, height = 500, radius = Math.min(width, height)/2 - 70;
-var path = ["./data_outer.csv", "./data_inner.csv"];
+var path = ["js/data_outer.csv", "js/data_inner.csv"];
 var pie = d3.layout.pie().sort(null).value(function(d) { return d.count; });
 
 //variable for outer

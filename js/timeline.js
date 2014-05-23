@@ -5,13 +5,14 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
     height = 170 - margin.top - margin.bottom;
 var columnwidth = 1.5;
 
-var x = d3.time.scale()
-    .range([0, width]);
+var parse = d3.time.format("%m/%d/%y").parse;
+var x = d3.time.scale().nice()
+    .range([0, width])
+    .domain([parse("12/02/12"), parse("05/05/14")]);
 
-var y = d3.scale.linear()
+var y = d3.scale.linear().nice()
     .range([height, 0]);
 
-var parse = d3.time.format("%m/%d/%y").parse;
 
 var xAxis = d3.svg.axis()
     .scale(x)
@@ -29,12 +30,12 @@ var yAxis = d3.svg.axis()
 
 var zoom = d3.behavior.zoom()
       .x(x)
-      .scaleExtent([1, 10])
+      // .scaleExtent([1, 10])
       .on("zoom", zoomed);
 
 function zoomed() {
   svg.select(".x.axis").call(xAxis);
-  svg.attr("transform", "translate(" + d3.event.translate[0] + ",0)scale(" + d3.event.scale + ", 1)");
+  //svg.attr("transform", "translate(" + d3.event.translate[0] + ",0)scale(" + d3.event.scale + ", 1)");
 }
 
 var svg = d3.select("#timeline").append("svg")
