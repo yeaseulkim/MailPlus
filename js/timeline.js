@@ -30,12 +30,20 @@ var yAxis = d3.svg.axis()
 
 var zoom = d3.behavior.zoom()
       .x(x)
-      // .scaleExtent([1, 10])
+      .scaleExtent([1, 10])
       .on("zoom", zoomed);
 
 function zoomed() {
   svg.select(".x.axis").call(xAxis);
-  //svg.attr("transform", "translate(" + d3.event.translate[0] + ",0)scale(" + d3.event.scale + ", 1)");
+
+  svg.selectAll("rect")
+    .attr("x", function(d) {return x(d.date);})
+    .attr("width", columnwidth * d3.event.scale);
+  
+}
+
+function redraw(selection) {
+
 }
 
 var svg = d3.select("#timeline").append("svg")
@@ -78,7 +86,7 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
       .style("text-anchor", "start")
       .text("outgoing");
 
-  svg.selectAll(".bar")
+  svg.selectAll(".bargroup")
       .data(data)
     .enter()
     .call(function()
