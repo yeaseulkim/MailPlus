@@ -36,15 +36,13 @@ var zoom = d3.behavior.zoom()
 function zoomed() {
   svg.select(".x.axis").call(xAxis);
 
+  var width_scaled = columnwidth * d3.event.scale;
   svg.selectAll("rect")
-    .attr("x", function(d) {return x(d.date);})
-    .attr("width", columnwidth * d3.event.scale);
+    .attr("x", function(d) {return x(d.date) - width_scaled/2;})
+    .attr("width", width_scaled);
   
 }
 
-function redraw(selection) {
-
-}
 
 var svg = d3.select("#timeline").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -96,14 +94,14 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
           
         bargroup.append("rect")
         .attr("class", "inbar")
-        .attr("x", function(d) { return x(d.date); })
+        .attr("x", function(d) { return x(d.date) - columnwidth/2; })
         .attr("width", columnwidth)
         .attr("y", function(d) { return y(d.incoming); })
         .attr("height", function(d) { return y(0) - y(d.incoming); });
 
         bargroup.append("rect")
         .attr("class", "outbar")
-        .attr("x", function(d) { return x(d.date); })
+        .attr("x", function(d) { return x(d.date) - columnwidth/2; })
         .attr("width", columnwidth)
         .attr("y", function(d) { return y(0); })
         .attr("height", function(d) { return y( (-1)*d.outgoing) - y(0); });
