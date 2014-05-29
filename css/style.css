@@ -54,9 +54,12 @@ td img
 	overflow: scroll;
 }
 
-.bargroup:hover rect{
-	fill:brown;
+.bargroup rect {
+	pointer-events: none;
 }
+/*.bargroup:hover rect{
+	fill:brown;
+}*/
 
 .timestamp {
 	align:right;

@@ -249,8 +249,14 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
         .attr("x", function(d) { return x(d.date) - columnwidth/2; })
         .attr("width", columnwidth)
         .attr("y", function(d) { return y(0); })
-        .attr("height", function(d) { return y( (-1)*d.outgoing) - y(0); });
+        .attr("height", function(d) { return y( (-1)*d.outgoing) - y(0); });      
+
       });
+
+  d3.selectAll(".bargroup").selectAll("rect")
+    .on("click", function() {
+      console.log("clicked!");
+    })
 
   // bind data to the inbox view also
   var inbox = d3.select("#emails");
@@ -270,22 +276,6 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
     
   }
 
-     // .text( function (d) { return MdYformat(d.date);} );
-
-  // var td = d3.selectAll(".thread")
-  //   .append("td")
-  //   .data(function(d) {
-  //     return d;
-  //   });
-
-
-  // console.log(td);
-
-
-  // var td = tr.append("td");
-  // td.append("img")
-  //     .attr("src", "./imgs/background/background_03_06.gif");
-
 
 // brushend has to go after d3.tsv (binding data)
 brushend(); // link initial brush with inbox
@@ -293,9 +283,7 @@ brushend(); // link initial brush with inbox
 zoom.scale(0.95); // set initial zoom level
 zoom.event(svg); // dispatch zoom
 // svg.attr("transform", "translate(-4000, 0)");
-
-
-    
+  
 
 });
 
