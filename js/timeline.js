@@ -130,20 +130,14 @@ function sameDate(date1, date2)
 function render_threads_of_a_day(date, data)
 {
 
-  // console.log("render one day!");
-
   var container = d3.select("#emails").select("#" + MdYformat(date));
   var slc = container.selectAll(".child");
 
-  // var isApr29 = sameDate( parse(date), new Date(2014, 4, 29) );
-  var isApr29 = true;
-  console.log(isApr29);
+  var isApr29 = sameDate( date,  new Date(2014, 3, 29) ); // 3 is Apr, JS is dumb
 
   if( slc.empty() === true )
   {
     var count = (parseInt(data.incoming) + parseInt(data.outgoing));
-
-    // console.log("rendering " + MdYformat(date) + ", " + count);
 
     for(var j = 0; j<count; j++)
     {
@@ -153,9 +147,11 @@ function render_threads_of_a_day(date, data)
       if(isApr29 === true && j===0)
       {
         tr.append("td")
+        .append("a")
+        .attr("href", "./index2.html")
         .append("img")
         .attr("src", "./imgs/background/background_03_06_01_entry.png");     
-        console.log("Apr 29!")
+        
       }
       else
       {
