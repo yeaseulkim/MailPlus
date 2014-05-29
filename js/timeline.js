@@ -4,11 +4,13 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 1084 - margin.left - margin.right,
     height = 170 - margin.top - margin.bottom;
 var columnwidth = 1.5;
+var domain1 = "12/02/12", domain2 = "05/05/14", 
+    brush1 = "04/01/14", brush2 = "05/05/14";
 
 var parse = d3.time.format("%m/%d/%y").parse;
 var x = d3.time.scale().nice()
     .range([0, width])
-    .domain([parse("12/02/12"), parse("05/05/14")]);
+    .domain([parse(domain1), parse(domain2)]);
 
 var y = d3.scale.linear().nice()
     .range([height, 0]);
@@ -58,11 +60,19 @@ function zoomed() {
 
 var brush = d3.svg.brush()
     .x(x)
-    .extent([parse("04/01/14"), parse("05/05/14")])
+    .extent([parse(brush1), parse(brush2)])
     .on("brush", brushed);
 
 function brushed() {
   console.log(brush.extent());
+
+  // update inbox
+  var inbox = d3.select("#emails");
+  for (var i=0; i<5; i++) {
+    inbox.append("tr").append("td").append("img")
+      .attr("src", "./imgs/background/background_03_06.gif")
+  }
+
 }
 
 var svg = d3.select("#timeline").append("svg")
@@ -151,9 +161,3 @@ function type(d) {
   return d;
 }
 
-// emails 
-var inbox = d3.select("#emails");
-for (var i=0; i<20; i++) {
-  inbox.append("tr").append("td").append("img")
-    .attr("src", "./imgs/background/background_03_06.gif")
-}
