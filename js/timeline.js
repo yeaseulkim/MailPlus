@@ -64,16 +64,49 @@ var brush = d3.svg.brush()
     .on("brush", brushed);
 
 function brushed() {
-  console.log(brush.extent());
 
   // update inbox
-  var inbox = d3.select("#emails");
-  for (var i=0; i<5; i++) {
-    inbox.append("tr").append("td").append("img")
-      .attr("src", "./imgs/background/background_03_06.gif")
-  }
+  d3.selectAll(".thread")
+    .call(updateInbox);
+
+  // console.log(inbox.datum());
+  // for (var i=0; i<5; i++) {
+  //   inbox.append("tr").append("td").append("img")
+  //     .attr("src", "./imgs/background/background_03_06.gif")
+  // }
 
 }
+
+function checkInFocus(d) {
+  var extent = brush.extent();
+  var inFocus = false;
+  if(d.date - extent[0] >= 0 && extent[1] - d.date >=0)
+    inFocus = true;
+  else
+    inFocus = false;
+
+  // console.log(inFocus);
+  return inFocus;
+}
+
+function updateInbox(selection) {
+
+  var data = selection.data();
+
+  for(var i = 0; i<data.length; i++) {
+    console.log(data[i]);
+    // var inFocus = checkInFocus();
+    
+  }
+
+  
+  // var td = tr.append("td");
+  // td.append("img")
+  //     .attr("src", "./imgs/background/background_03_06.gif");
+
+  // console.log(td);
+}
+
 
 var svg = d3.select("#timeline").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -94,7 +127,7 @@ svg.append("g")
       .attr("y", -6)
       .attr("height", height + 7);
 
-// brushed();
+brushed();
 brush.event(d3.select('.x.brush'));
 
 
@@ -151,6 +184,31 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
         .attr("y", function(d) { return y(0); })
         .attr("height", function(d) { return y( (-1)*d.outgoing) - y(0); });
       });
+
+  // bind data to the inbox view also
+  var tr = d3.select("#emails").selectAll("tr")
+    .data(data)
+    .enter()
+    .append("tr")
+    .attr("class", "thread");
+
+  // var td = d3.selectAll(".thread")
+  //   .append("td")
+  //   .data(function(d) {
+  //     return d;
+  //   });
+
+
+  // console.log(td);
+
+
+  // var td = tr.append("td");
+  // td.append("img")
+  //     .attr("src", "./imgs/background/background_03_06.gif");
+
+    
+
+    
 
 });
 
