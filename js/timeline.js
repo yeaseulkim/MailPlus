@@ -44,7 +44,6 @@ function zoomed() {
     .attr("width", width_scaled);
 
   // scale the highlighted area of the brush
-
   svg.select(".x.brush")
     .x(x);
 }
@@ -62,7 +61,11 @@ var svg = d3.select("#timeline").append("svg")
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .call(zoom);
+    .call(zoom)
+    .on("mousedown.zoom", null);
+    // .on("touchstart.zoom", null)
+    // .on("touchmove.zoom", null);
+    // .on("touchend.zoom", null);
 
 
 svg.append("g")
