@@ -51,7 +51,7 @@ td img
 
 #timeline {
 	max-width: 1040px;
-	/*overflow: scroll;*/
+	overflow: scroll;
 }
 
 .bargroup:hover rect{

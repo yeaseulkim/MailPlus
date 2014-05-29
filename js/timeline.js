@@ -2,10 +2,11 @@
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 1084 - margin.left - margin.right,
-    height = 170 - margin.top - margin.bottom;
+    height = 170 - margin.top - margin.bottom,
+    initialoffset = -4000;
 var columnwidth = 1.5;
 var domain1 = "12/02/12", domain2 = "05/05/14", 
-    brush1 = "04/01/14", brush2 = "05/05/14";
+    brush1 = "05/01/14", brush2 = "05/05/14";
 
 var parse = d3.time.format("%m/%d/%y").parse;
 var x = d3.time.scale().nice()
@@ -111,12 +112,6 @@ function updateInbox() {
     
   }
 
-  
-  // var td = tr.append("td");
-  // td.append("img")
-  //     .attr("src", "./imgs/background/background_03_06.gif");
-
-  // console.log(td);
 }
 
 function render_threads_of_a_day(date, data)
@@ -170,7 +165,7 @@ function erase_threads_of_a_day(date)
 
 }
 
-
+// var off = parseInt(initialoffset) + parseInt(margin.left);
 var svg = d3.select("#timeline").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -178,9 +173,6 @@ var svg = d3.select("#timeline").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .call(zoom)
     .on("mousedown.zoom", null);
-    // .on("touchstart.zoom", null)
-    // .on("touchmove.zoom", null);
-    // .on("touchend.zoom", null);
 
 
 svg.append("g")
@@ -283,7 +275,11 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
 
 
 // brushend has to go after d3.tsv (binding data)
-brushend();
+brushend(); // link initial brush with inbox
+
+zoom.scale(6); // set initial zoom level
+zoom.event(svg); // dispatch zoom
+// svg.attr("transform", "translate(-4000, 0)");
 
 
     
