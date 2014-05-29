@@ -12,6 +12,8 @@ var x = d3.time.scale().nice()
     .range([0, width])
     .domain([parse(domain1), parse(domain2)]);
 
+var MdYformat = d3.time.format("%B-%d-%Y"); // no leading digit
+
 var y = d3.scale.linear().nice()
     .range([height, 0]);
 
@@ -65,9 +67,7 @@ var brush = d3.svg.brush()
 
 function brushed() {
 
-  // update inbox
-  d3.selectAll(".thread")
-    .call(updateInbox);
+  updateInbox();
 
   // console.log(inbox.datum());
   // for (var i=0; i<5; i++) {
@@ -80,7 +80,7 @@ function brushed() {
 function checkInFocus(d) {
   var extent = brush.extent();
   var inFocus = false;
-  if(d.date - extent[0] >= 0 && extent[1] - d.date >=0)
+  if(d - extent[0] >= 0 && extent[1] - d >=0)
     inFocus = true;
   else
     inFocus = false;
@@ -89,13 +89,36 @@ function checkInFocus(d) {
   return inFocus;
 }
 
-function updateInbox(selection) {
+function updateInbox() {
 
-  var data = selection.data();
+  var inbox = d3.select("#emails");
+  var data = inbox.selectAll("tr").data();
 
   for(var i = 0; i<data.length; i++) {
-    console.log(data[i]);
-    // var inFocus = checkInFocus();
+    
+    var day_data = data[i];
+    var count = [day_data.incoming+day_data.outgoing];
+    var inFocus = checkInFocus(day_data.date);
+
+    if(inFocus===true) {
+      // render emails for that day
+      
+      var day_str = MdYformat(day_data.date);
+      var threadID = "#" + day_str;
+      inbox.select(threadID)
+        .data(count)
+        .enter()
+        .append("tr")
+        .attr("id", day_str)
+        .append("img")
+          .attr("src", "./imgs/background/background_03_06.gif");
+
+    }
+    else {
+      // delete all children
+    }
+
+    
     
   }
 
@@ -186,11 +209,30 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
       });
 
   // bind data to the inbox view also
-  var tr = d3.select("#emails").selectAll("tr")
+  var inbox = d3.select("#emails");
+  var tr = inbox.selectAll("tr")
     .data(data)
-    .enter()
-    .append("tr")
-    .attr("class", "thread");
+     .enter()
+     .append("tr")
+     .attr("class", "thread")
+     .attr("id", function (d) { return MdYformat(d.date);});
+
+  var inboxData = tr.data();
+  for(var i = 0; i<inboxData.length; i++)
+  {
+    var data = inboxData[i];
+    var container = inbox.select("#" + MdYformat(data.date));
+    for(var j = 0; j< (data.incoming + data.outgoing); j++)
+    {
+      container.append("tr")
+      .append("img")
+      .attr("src", "./imgs/background/background_03_06.gif");
+    }
+    
+    
+  }
+
+     // .text( function (d) { return MdYformat(d.date);} );
 
   // var td = d3.selectAll(".thread")
   //   .append("td")
