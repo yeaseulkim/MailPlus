@@ -130,11 +130,17 @@ function render_threads_of_a_day(date, data)
 
     for(var j = 0; j<count; j++)
     {
-      container.append("tr")
-      .attr("class", "child")
+      var tr = container.append("tr")
+      .attr("class", "child");
+
+      tr.append("td")
       .append("img")
-      .attr("src", "./imgs/background/background_03_06.gif")
+      .attr("src", "./imgs/background/background_03_06.gif");
+      
+
+      tr.append("td")
       .text(MdYformat(date));
+
 
     }
   }
