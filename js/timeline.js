@@ -30,27 +30,66 @@ var yAxis = d3.svg.axis()
 
 var zoom = d3.behavior.zoom()
       .x(x)
-      .scaleExtent([1, 10])
+      .scaleExtent([0.8, 10])
       .on("zoom", zoomed);
 
 function zoomed() {
+
+  // scale x axis
   svg.select(".x.axis").call(xAxis);
 
+  // scale the bars
   var width_scaled = columnwidth * d3.event.scale;
-  svg.selectAll("rect")
+  svg.selectAll(".bargroup rect")
     .attr("x", function(d) {return x(d.date) - width_scaled/2;})
     .attr("width", width_scaled);
-  
+
+  var extent = brush.extent();
+  brush.extent(extent);
+  d3.select(".brush .extent")
+    .attr("x", x(extent[0]))
+    .attr("width", x(extent[1])-x(extent[0]));
+
+  console.log(brush.extent());
+
+
 }
 
+function updateBrush() {
+  var extent = brush.extent();
+
+  // console.log(extent);
+  d3.selectAll(".bargroup").selectAll("rect").classed("selected", function (d) {
+    return true;
+  });
+}
+
+var brush = d3.svg.brush()
+    .x(x)
+    .on("brush", brushed);
+
+function brushed() {
+  console.log(brush.extent());
+}
 
 var svg = d3.select("#timeline").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .call(zoom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .on("mousedown.zoom", null);
+    // .on("touchstart.zoom", null)
+    // .on("touchmove.zoom", null);
+    // .on("touchend.zoom", null);
 
+
+svg.append("g")
+      .attr("class", "x brush")
+      .call(brush)
+    .selectAll("rect")
+      .attr("y", -6)
+      .attr("height", height + 7);
 
 
 d3.tsv("js/timeline_data.tsv", type, function(error, data) {
@@ -106,8 +145,6 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
         .attr("y", function(d) { return y(0); })
         .attr("height", function(d) { return y( (-1)*d.outgoing) - y(0); });
       });
-
- 
 
 });
 
