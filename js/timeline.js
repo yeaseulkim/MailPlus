@@ -190,8 +190,7 @@ svg.append("g")
       .attr("y", -6)
       .attr("height", height + 7);
 
-brushend();
-brush.event(d3.select('.x.brush'));
+brush.event(d3.select('.x.brush')); // dispatch initial brush
 
 
 d3.tsv("js/timeline_data.tsv", type, function(error, data) {
@@ -282,7 +281,10 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
   // td.append("img")
   //     .attr("src", "./imgs/background/background_03_06.gif");
 
-    
+
+// brushend has to go after d3.tsv (binding data)
+brushend();
+
 
     
 
