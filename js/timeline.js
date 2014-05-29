@@ -150,3 +150,10 @@ function type(d) {
   d.incoming = +d.incoming;
   return d;
 }
+
+// emails 
+var inbox = d3.select("#emails");
+for (var i=0; i<20; i++) {
+  inbox.append("tr").append("td").append("img")
+    .attr("src", "./imgs/background/background_03_06.gif")
+}
