@@ -34,6 +34,7 @@ var zoom = d3.behavior.zoom()
       .on("zoom", zoomed);
 
 function zoomed() {
+
   // scale x axis
   svg.select(".x.axis").call(xAxis);
 
@@ -43,9 +44,24 @@ function zoomed() {
     .attr("x", function(d) {return x(d.date) - width_scaled/2;})
     .attr("width", width_scaled);
 
-  // scale the highlighted area of the brush
-  svg.select(".x.brush")
-    .x(x);
+  var extent = brush.extent();
+  brush.extent(extent);
+  d3.select(".brush .extent")
+    .attr("x", x(extent[0]))
+    .attr("width", x(extent[1])-x(extent[0]));
+
+  console.log(brush.extent());
+
+
+}
+
+function updateBrush() {
+  var extent = brush.extent();
+
+  // console.log(extent);
+  d3.selectAll(".bargroup").selectAll("rect").classed("selected", function (d) {
+    return true;
+  });
 }
 
 var brush = d3.svg.brush()
@@ -53,7 +69,7 @@ var brush = d3.svg.brush()
     .on("brush", brushed);
 
 function brushed() {
-  //console.log(brush.extent());
+  console.log(brush.extent());
 }
 
 var svg = d3.select("#timeline").append("svg")
