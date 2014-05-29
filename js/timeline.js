@@ -69,8 +69,12 @@ var brush = d3.svg.brush()
 
 function brushend() {
 
-  updateInbox();
+  if(brush.empty() === true)
+  {
+    return;
+  }
 
+  updateInbox();
 
 }
 
@@ -286,7 +290,7 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
 // brushend has to go after d3.tsv (binding data)
 brushend(); // link initial brush with inbox
 
-zoom.scale(0.9); // set initial zoom level
+zoom.scale(0.95); // set initial zoom level
 zoom.event(svg); // dispatch zoom
 // svg.attr("transform", "translate(-4000, 0)");
 
