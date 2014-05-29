@@ -44,28 +44,21 @@ function zoomed() {
     .attr("x", function(d) {return x(d.date) - width_scaled/2;})
     .attr("width", width_scaled);
 
+  // update the brush
   var extent = brush.extent();
   brush.extent(extent);
   d3.select(".brush .extent")
     .attr("x", x(extent[0]))
     .attr("width", x(extent[1])-x(extent[0]));
-
-  console.log(brush.extent());
+  // console.log(brush.extent());
 
 
 }
 
-function updateBrush() {
-  var extent = brush.extent();
-
-  // console.log(extent);
-  d3.selectAll(".bargroup").selectAll("rect").classed("selected", function (d) {
-    return true;
-  });
-}
 
 var brush = d3.svg.brush()
     .x(x)
+    .extent([parse("04/01/14"), parse("05/05/14")])
     .on("brush", brushed);
 
 function brushed() {
@@ -90,6 +83,9 @@ svg.append("g")
     .selectAll("rect")
       .attr("y", -6)
       .attr("height", height + 7);
+
+// brushed();
+brush.event(d3.select('.x.brush'));
 
 
 d3.tsv("js/timeline_data.tsv", type, function(error, data) {
