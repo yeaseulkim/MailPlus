@@ -119,6 +119,14 @@ function updateInbox() {
 
 }
 
+function sameDate(date1, date2)
+{
+  if (date1 - date2 === 0)
+    return true;
+  else
+    return false;
+}
+
 function render_threads_of_a_day(date, data)
 {
 
@@ -127,20 +135,35 @@ function render_threads_of_a_day(date, data)
   var container = d3.select("#emails").select("#" + MdYformat(date));
   var slc = container.selectAll(".child");
 
+  // var isApr29 = sameDate( parse(date), new Date(2014, 4, 29) );
+  var isApr29 = true;
+  console.log(isApr29);
+
   if( slc.empty() === true )
   {
     var count = (parseInt(data.incoming) + parseInt(data.outgoing));
 
-    console.log("rendering " + MdYformat(date) + ", " + count);
+    // console.log("rendering " + MdYformat(date) + ", " + count);
 
     for(var j = 0; j<count; j++)
     {
       var tr = container.append("tr")
       .attr("class", "child");
 
-      tr.append("td")
-      .append("img")
-      .attr("src", "./imgs/background/background_03_06_01.gif");     
+      if(isApr29 === true && j===0)
+      {
+        tr.append("td")
+        .append("img")
+        .attr("src", "./imgs/background/background_03_06_01_entry.png");     
+        console.log("Apr 29!")
+      }
+      else
+      {
+        tr.append("td")
+        .append("img")
+        .attr("src", "./imgs/background/background_03_06_01.gif");     
+      }
+      
 
       tr.append("td")
       .attr("class", "timestamp")
@@ -172,7 +195,7 @@ function erase_threads_of_a_day(date)
   }
   else
   {
-    console.log("erasing " + MdYformat(date));
+    // console.log("erasing " + MdYformat(date));
     slc.remove();
   }
 
