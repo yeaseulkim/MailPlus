@@ -6,6 +6,11 @@
 
 /* Layout helpers
 ----------------------------------*/
+#newemail {border: none; padding: 10px; width: 100%;}
+
+.inner {border: 1px solid green; margin: 10px; width: auto; height: 20px;}
+
+
 .ui-helper-hidden {
 	display: none;
 }
