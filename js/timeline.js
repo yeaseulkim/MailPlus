@@ -102,20 +102,22 @@ function updateInbox() {
 
     if(inFocus===true) {
       // render emails for that day
+      render_threads_of_a_day(day_data.date, day_data);
       
-      var day_str = MdYformat(day_data.date);
-      var threadID = "#" + day_str;
-      inbox.select(threadID)
-        .data(count)
-        .enter()
-        .append("tr")
-        .attr("id", day_str)
-        .append("img")
-          .attr("src", "./imgs/background/background_03_06.gif");
+      // var day_str = MdYformat(day_data.date);
+      // var threadID = "#" + day_str;
+      // inbox.select(threadID)
+      //   .data(count)
+      //   .enter()
+      //   .append("tr")
+      //   .attr("id", day_str)
+      //   .append("img")
+      //     .attr("src", "./imgs/background/background_03_06.gif");
 
     }
     else {
       // delete all children
+      erase_threads_of_a_day(day_data.date);
     }
 
     
@@ -128,6 +130,45 @@ function updateInbox() {
   //     .attr("src", "./imgs/background/background_03_06.gif");
 
   // console.log(td);
+}
+
+function render_threads_of_a_day(date, data)
+{
+  var container = d3.select("#emails").select("#" + MdYformat(date));
+
+  if( d3.select(container.childNodes).empty() === true )
+  {
+    for(var j = 0; j< (data.incoming + data.outgoing); j++)
+    {
+      container.append("tr")
+      .append("img")
+      .attr("src", "./imgs/background/background_03_06.gif");
+    }
+  }
+  else
+  {
+    return;
+  }
+
+  
+
+}
+
+function erase_threads_of_a_day(date)
+{
+  var container = d3.select("#emails").select("#" + MdYformat(date));
+
+  var slc = d3.select(container.childNodes);
+
+  if(slc.empty() === false) 
+  {
+    slc.remove();
+  }
+  else
+  {
+    return;
+  }
+
 }
 
 
@@ -221,13 +262,7 @@ d3.tsv("js/timeline_data.tsv", type, function(error, data) {
   for(var i = 0; i<inboxData.length; i++)
   {
     var data = inboxData[i];
-    var container = inbox.select("#" + MdYformat(data.date));
-    for(var j = 0; j< (data.incoming + data.outgoing); j++)
-    {
-      container.append("tr")
-      .append("img")
-      .attr("src", "./imgs/background/background_03_06.gif");
-    }
+    erase_threads_of_a_day(data.date);
     
     
   }
