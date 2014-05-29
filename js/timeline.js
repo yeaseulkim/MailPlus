@@ -63,9 +63,9 @@ function zoomed() {
 var brush = d3.svg.brush()
     .x(x)
     .extent([parse(brush1), parse(brush2)])
-    .on("brush", brushed);
+    .on("brushend", brushend);
 
-function brushed() {
+function brushend() {
 
   updateInbox();
 
@@ -191,7 +191,7 @@ svg.append("g")
       .attr("y", -6)
       .attr("height", height + 7);
 
-brushed();
+brushend();
 brush.event(d3.select('.x.brush'));
 
 
