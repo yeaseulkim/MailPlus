@@ -69,11 +69,6 @@ function brushend() {
 
   updateInbox();
 
-  // console.log(inbox.datum());
-  // for (var i=0; i<5; i++) {
-  //   inbox.append("tr").append("td").append("img")
-  //     .attr("src", "./imgs/background/background_03_06.gif")
-  // }
 
 }
 
@@ -91,28 +86,20 @@ function checkInFocus(d) {
 
 function updateInbox() {
 
+  // console.log("updateInbox!");
+
   var inbox = d3.select("#emails");
   var data = inbox.selectAll("tr").data();
 
   for(var i = 0; i<data.length; i++) {
     
     var day_data = data[i];
-    var count = [day_data.incoming+day_data.outgoing];
     var inFocus = checkInFocus(day_data.date);
 
     if(inFocus===true) {
+
       // render emails for that day
       render_threads_of_a_day(day_data.date, day_data);
-      
-      // var day_str = MdYformat(day_data.date);
-      // var threadID = "#" + day_str;
-      // inbox.select(threadID)
-      //   .data(count)
-      //   .enter()
-      //   .append("tr")
-      //   .attr("id", day_str)
-      //   .append("img")
-      //     .attr("src", "./imgs/background/background_03_06.gif");
 
     }
     else {
@@ -134,15 +121,26 @@ function updateInbox() {
 
 function render_threads_of_a_day(date, data)
 {
-  var container = d3.select("#emails").select("#" + MdYformat(date));
 
-  if( d3.select(container.childNodes).empty() === true )
+  // console.log("render one day!");
+
+  var container = d3.select("#emails").select("#" + MdYformat(date));
+  var slc = container.selectAll(".child");
+
+  if( slc.empty() === true )
   {
-    for(var j = 0; j< (data.incoming + data.outgoing); j++)
+    var count = (parseInt(data.incoming) + parseInt(data.outgoing));
+
+    console.log("rendering " + MdYformat(date) + ", " + count);
+
+    for(var j = 0; j<count; j++)
     {
       container.append("tr")
+      .attr("class", "child")
       .append("img")
-      .attr("src", "./imgs/background/background_03_06.gif");
+      .attr("src", "./imgs/background/background_03_06.gif")
+      .text(MdYformat(date));
+
     }
   }
   else
@@ -158,15 +156,16 @@ function erase_threads_of_a_day(date)
 {
   var container = d3.select("#emails").select("#" + MdYformat(date));
 
-  var slc = d3.select(container.childNodes);
+  var slc = container.selectAll(".child");
 
-  if(slc.empty() === false) 
+  if(slc.empty() === true) 
   {
-    slc.remove();
+    return; 
   }
   else
   {
-    return;
+    console.log("erasing " + MdYformat(date));
+    slc.remove();
   }
 
 }
