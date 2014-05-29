@@ -58,7 +58,10 @@ td img
 	fill:brown;
 }
 
-
+.timestamp {
+	width: 148;
+	align:right;
+}
 
 .axis {
   font: 10px sans-serif;
