@@ -14,6 +14,7 @@ var x = d3.time.scale().nice()
     .domain([parse(domain1), parse(domain2)]);
 
 var MdYformat = d3.time.format("%B-%d-%Y"); // no leading digit
+var Gmailformat = d3.time.format("%m/%d/%y"); // for email timestamps
 
 var y = d3.scale.linear().nice()
     .range([height, 0]);
@@ -135,11 +136,12 @@ function render_threads_of_a_day(date, data)
 
       tr.append("td")
       .append("img")
-      .attr("src", "./imgs/background/background_03_06.gif");
+      .attr("src", "./imgs/background/background_03_06_01.gif");
       
 
       tr.append("td")
-      .text(MdYformat(date));
+      .attr("class", "timestamp")
+      .text(Gmailformat(date));
 
 
     }
