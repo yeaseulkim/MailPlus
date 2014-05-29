@@ -141,6 +141,7 @@ function render_threads_of_a_day(date, data)
       tr.append("td")
       .attr("class", "timestamp")
       .attr("background", "./imgs/background/background_03_06_02.gif")
+      .append("text")
       .text(Gmailformat(date));
 
 

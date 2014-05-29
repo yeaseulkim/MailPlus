@@ -59,8 +59,13 @@ td img
 }
 
 .timestamp {
-	width: 148;
 	align:right;
+}
+
+.timestamp text {
+	color: #2d2d2d;
+	font-family: Arial, sans-serif;
+	font-size: 13px;
 }
 
 .axis {
