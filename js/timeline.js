@@ -6,7 +6,7 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
     initialoffset = -4000;
 var columnwidth = 1.5;
 var domain1 = "12/02/12", domain2 = "05/05/14", 
-    brush1 = "05/01/14", brush2 = "05/05/14";
+    brush1 = "04/29/14", brush2 = "05/05/14";
 
 var parse = d3.time.format("%m/%d/%y").parse;
 var x = d3.time.scale().nice()

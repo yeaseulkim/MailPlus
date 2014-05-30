@@ -4,6 +4,7 @@
 	<title> Mail+ </title>
 	<link rel="stylesheet" type="text/css" href="./css/topic.css">
 	<link rel="stylesheet" type="text/css" href="./css/accordion_topic.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./css/style.css"> -->
 	<!--<link rel="stylesheet" type="text/css" href="./jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css"> -->
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -18,15 +19,47 @@
 		<tr>
 			<!-- left side bar -->
 			<td>
-				<img src="./imgs/background/background_01.gif">
+				<table id="left_side">
+					<tr id="Google_Logo">
+						<td> <a href="./index.html"> <img src="./imgs/background/background_01_01.gif"/>  </a> </td>
+					</tr>
+					<tr>
+						<td> <img src="./imgs/background/background_01_02.gif"/> </td>
+					</tr>
+					<tr>
+						<td> <img src="./imgs/background/background_01_04.gif"/> </td>
+					</tr>
+					<tr id="Inbox">
+						<td> <a href="./index.html"> <img src="./imgs/background/background_01_05.gif"/>  </a> </td>
+					</tr>
+					<tr>
+						<td> <img src="./imgs/background/background_01_06.gif"/> </td>
+					</tr>
+				</table>
+				
 			</td>
 			
 			<!-- center -->
 			<td>
 				<!-- search, buttons -->
-				<div>
+				<table id="top_area">
+					<tr>
+						<td>
+							<img src="./imgs/background/background_02_01.gif"/>
+							<img src="./imgs/background/background_02_02.gif" width="80"/>
+							<a href="./sentiment.html"> <img src="./imgs/sentimentIcon.png" height="40"/></a> 
+							<img src="./imgs/background/background_02_03.gif"/>
+						</td>
+					</tr>
+					<tr>
+						<td> <!-- <img src="./imgs/background/background_02_04.gif"/> -->
+						<img src="./imgs/background/topic_top_02.gif">
+						</td>
+					</tr>
+				</table>
+				<!-- <div>
 					<img src="./imgs/background/topic_top.png">
-				</div>
+				</div> -->
 
 				<!-- list of mails -->
 				<div id="email">

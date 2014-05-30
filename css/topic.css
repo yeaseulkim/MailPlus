@@ -25,6 +25,10 @@ td
 {
 	padding:0px;
 }
+td img 
+{ 
+	vertical-align: middle; 
+}
 
 .inbar {
   fill: steelblue;
