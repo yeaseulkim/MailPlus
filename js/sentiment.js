@@ -152,7 +152,16 @@ function group1(group, clicked)
 		.on("click", function() {draw_Group(clicked);});
 
 	group.append("img")
-		.attr("src", "imgs/email1.png");
+		.attr("src", "imgs/email0.png")
+		.attr("width", "500")
+		.attr("id", "list")
+		.on("click", function() {
+			group.select("#list").remove();
+			group.append("img")
+				.attr("src", "imgs/email1.png")
+				.attr("width", "500")
+				.attr("id", "emails");
+		});
 }
 
 function draw_Group(clicked){
