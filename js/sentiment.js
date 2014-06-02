@@ -145,9 +145,13 @@ function draw_Individual(clicked)
 }
 
 
-function group1(group)
+function group1(group, clicked)
 {
-	console.log(group);
+	group.selectAll("img").remove();
+
+	group.append("img")
+		.attr("src", "imgs/g1_on.png")
+		.on("click", function() {draw_Group(clicked);});
 
 	group.append("img")
 		.attr("src", "imgs/email1.png");
@@ -177,7 +181,7 @@ function draw_Group(clicked){
 		var g1 = info.append("div");
 		g1.append("img")
 			.attr("src", "imgs/g1_off.png")
-			.on("click", function(d) { group1(g1); });
+			.on("click", function(d) { group1(g1, clicked); });
 
 		info.append("div")
 			.append("img")
@@ -204,7 +208,7 @@ function draw_Group(clicked){
 		var g1 = info.append("div");
 		g1.append("img")
 			.attr("src", "imgs/g1_off.png")
-			.on("click", function(d) { group1(g1); });
+			.on("click", function(d) { group1(g1, clicked); });
 
 		info.append("div")
 			.append("img")
