@@ -41,7 +41,7 @@ function visualize(){
 		var g_out = svg.selectAll(".arc").select("#outerCircle")
 			.data(pie(data)).enter().append("g").attr("class", "arc")
 			.on("mouseover",function(d){if (d.data.sentiment == "positive"){$(this).css('cursor', 'pointer'); }})
-			.on("click",function(d){if (d.data.sentiment == "positive"){draw_Group();}});
+			.on("click",function(d){if (d.data.sentiment == "positive"){draw_Group("out");}});
 
 		g_out.append("path")
 			.attr("d", arc_outer)
@@ -61,7 +61,7 @@ function visualize(){
 			var g_in = svg.selectAll(".arc").select("#innerCircle")
 				.data(pie(data)).enter().append("g").attr("class", "arc")
 				.on("mouseover",function(d){if (d.data.sentiment == "positive"){$(this).css('cursor', 'pointer'); }})
-				.on("click",function(d){if (d.data.sentiment == "positive"){draw_Group();}});
+				.on("click",function(d){if (d.data.sentiment == "positive"){draw_Group("in");}});
 
 			g_in.append("path")
 				.attr("d", arc_inner)
@@ -79,7 +79,7 @@ function visualize(){
 
 function draw_Legend(){
 	$("#contents").remove();
-	var tagInsert = $('<div id="contents"><div id="legend"><img src="imgs/legend.png" alt="legend"/></div></div>');
+	var tagInsert = $('<div id="contents"><div id="legend" class="child"><img src="imgs/legend.png" alt="legend"/></div></div>');
 	/*<div id="contents">
 		<div id="legend">
 			<img src="imgs/legend.png" alt="legend"/>
@@ -88,12 +88,72 @@ function draw_Legend(){
 	tagInsert.appendTo("#main-right");
 }
 
-function draw_Group(){
-	$("#contents").remove();
-	var tagInsert = $('<div id="contents"> <div class="menu"><img src="imgs/menu1_off.png"/></div> <div class="menu"><img src="imgs/menu2_off.png"/> </div>');
-	tagInsert.appendTo("#main-right");
-	var tagInsert = $('<div class="group_clear"> Most positive groups </div><div class="group"> <img src="imgs/g1_off.png"/> </div><div class="group"> <img src="imgs/g2_off.png"/> </div><div class="group"> <img src="imgs/g3_off.png"/> </div><div class="group"> <img src="imgs/g4_off.png"/> </div>');
-	tagInsert.appendTo("#contents");	
+function draw_Group(clicked){
+	console.log("draw group!");
+
+	d3.select("#contents").selectAll(".child").remove();
+
+	var table = d3.select("#contents").append("table")
+				.attr("class", "child");
+
+	var menu = table.append("tr").append("td");
+
+	menu.append("img")
+		.attr("src", "imgs/menu1_on.png");
+
+	menu.append("img")
+		.attr("src", "imgs/menu2_off.png");
+
+	var info = table.append("tr").append("td");
+
+	if(clicked === "in")
+	{
+		info.append("div")
+			.append("img")
+			.attr("src", "imgs/g1_off.png");
+
+		info.append("div")
+			.append("img")
+			.attr("src", "imgs/g2_off.png");
+
+		info.append("div")
+			.append("img")
+			.attr("src", "imgs/g3_off.png");
+
+		info.append("div")
+			.append("img")
+			.attr("src", "imgs/g4_off.png");
+	}
+	else
+	{
+		info.append("div")
+			.append("img")
+			.attr("src", "imgs/g3_off.png");
+
+		info.append("div")
+			.append("img")
+			.attr("src", "imgs/g4_off.png");
+
+		info.append("div")
+			.append("img")
+			.attr("src", "imgs/g1_off.png");
+
+		info.append("div")
+			.append("img")
+			.attr("src", "imgs/g2_off.png");
+		
+	}
+	
+
+	// var tagInsert = $('<div id="contents"> <div class="menu"><img src="imgs/menu1_off.png"/></div> 
+	// 	<div class="menu"><img src="imgs/menu2_off.png"/> </div>');
+	// tagInsert.appendTo("#main-right");
+	// var tagInsert = $('<div class="group_clear"> Most positive groups </div>
+	// 	<div class="group"> <img src="imgs/g1_off.png"/> </div>
+	// 	<div class="group"> <img src="imgs/g2_off.png"/> </div>
+	// 	<div class="group"> <img src="imgs/g3_off.png"/> </div>
+	// 	<div class="group"> <img src="imgs/g4_off.png"/> </div>');
+	// tagInsert.appendTo("#contents");	
 	/*<div id="contents">
 		<div class="menu"> <img src="imgs/menu1_off.png"/> </div> 
 		<div class="menu"> <img src="imgs/menu2_off.png"/> </div>
