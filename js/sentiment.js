@@ -112,32 +112,30 @@ function draw_Individual(clicked)
 	var row2 = table.append("tr").append("td");	
 
 	row1.append("img")
-			.attr("src", "imgs/indi1.png")
+			.attr("src", "imgs/individual1.png");
+
+	row1.append("img")
+			.attr("src", "imgs/individual2.png")
 			.attr("width", "80")
 			.attr("height", "80");
 
 	row1.append("img")
-			.attr("src", "imgs/indi2.png")
-			.attr("width", "80")
-			.attr("height", "80");
-
-	row1.append("img")
-			.attr("src", "imgs/indi3.png")
+			.attr("src", "imgs/individual3.png")
 			.attr("width", "80")
 			.attr("height", "80");
 
 	row2.append("img")
-			.attr("src", "imgs/indi4.png")
+			.attr("src", "imgs/individual4.png")
 			.attr("width", "80")
 			.attr("height", "80");
 
 	row2.append("img")
-			.attr("src", "imgs/indi5.png")
+			.attr("src", "imgs/individual5.png")
 			.attr("width", "80")
 			.attr("height", "80");
 
 	row2.append("img")
-			.attr("src", "imgs/indi6.png")
+			.attr("src", "imgs/individual6.png")
 			.attr("width", "80")
 			.attr("height", "80");
 
