@@ -144,6 +144,15 @@ function draw_Individual(clicked)
 
 }
 
+
+function group1(group)
+{
+	console.log(group);
+
+	group.append("img")
+		.attr("src", "imgs/email1.png");
+}
+
 function draw_Group(clicked){
 
 	d3.select("#contents").selectAll(".child").remove();
@@ -165,10 +174,10 @@ function draw_Group(clicked){
 
 	if(clicked === "in")
 	{
-		info.append("div")
-			.append("img")
+		var g1 = info.append("div");
+		g1.append("img")
 			.attr("src", "imgs/g1_off.png")
-			.on("click", function(d) { console.log("group 1"); });
+			.on("click", function(d) { group1(g1); });
 
 		info.append("div")
 			.append("img")
@@ -192,35 +201,15 @@ function draw_Group(clicked){
 			.append("img")
 			.attr("src", "imgs/g4_off.png");
 
-		info.append("div")
-			.append("img")
+		var g1 = info.append("div");
+		g1.append("img")
 			.attr("src", "imgs/g1_off.png")
-			.on("click", function(d) { console.log("group 1"); });
+			.on("click", function(d) { group1(g1); });
 
 		info.append("div")
 			.append("img")
 			.attr("src", "imgs/g2_off.png");
 		
 	}
-	
-
-	// var tagInsert = $('<div id="contents"> <div class="menu"><img src="imgs/menu1_off.png"/></div> 
-	// 	<div class="menu"><img src="imgs/menu2_off.png"/> </div>');
-	// tagInsert.appendTo("#main-right");
-	// var tagInsert = $('<div class="group_clear"> Most positive groups </div>
-	// 	<div class="group"> <img src="imgs/g1_off.png"/> </div>
-	// 	<div class="group"> <img src="imgs/g2_off.png"/> </div>
-	// 	<div class="group"> <img src="imgs/g3_off.png"/> </div>
-	// 	<div class="group"> <img src="imgs/g4_off.png"/> </div>');
-	// tagInsert.appendTo("#contents");	
-	/*<div id="contents">
-		<div class="menu"> <img src="imgs/menu1_off.png"/> </div> 
-		<div class="menu"> <img src="imgs/menu2_off.png"/> </div>
-		<div class="group_clear"> Most positive groups </div>
-		<div class="group"> <img src="imgs/g1_off.png"/> </div>
-		<div class="group"> <img src="imgs/g2_off.png"/> </div>
-		<div class="group"> <img src="imgs/g3_off.png"/> </div>
-		<div class="group"> <img src="imgs/g4_off.png"/> </div>
-	</div>*/
 
 }
