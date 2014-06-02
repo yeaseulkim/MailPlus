@@ -204,18 +204,19 @@ function draw_Group(clicked){
 	}
 	else
 	{
-		info.append("div")
-			.append("img")
-			.attr("src", "imgs/g3_off.png");
-
-		info.append("div")
-			.append("img")
-			.attr("src", "imgs/g4_off.png");
-
 		var g1 = info.append("div");
 		g1.append("img")
 			.attr("src", "imgs/g1_off.png")
 			.on("click", function(d) { group1(g1, clicked); });
+
+
+		info.append("div")
+			.append("img")
+			.attr("src", "imgs/g4_off.png");
+			
+		info.append("div")
+			.append("img")
+			.attr("src", "imgs/g3_off.png");
 
 		info.append("div")
 			.append("img")
