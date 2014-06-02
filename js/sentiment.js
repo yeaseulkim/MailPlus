@@ -88,21 +88,78 @@ function draw_Legend(){
 	tagInsert.appendTo("#main-right");
 }
 
-function draw_Group(clicked){
-	console.log("draw group!");
+function draw_Individual(clicked)
+{
+	console.log("indiv: " + clicked);
 
 	d3.select("#contents").selectAll(".child").remove();
 
 	var table = d3.select("#contents").append("table")
 				.attr("class", "child");
 
-	var menu = table.append("tr").append("td");
+	var menu = table.append("tr").append("td")
+				.attr("id", "menu");
+
+	menu.append("img")
+		.attr("src", "imgs/menu1_off.png")
+		.on("click", function() { draw_Group(clicked); } );
+
+	menu.append("img")
+		.attr("src", "imgs/menu2_on.png");
+
+
+	var row1 = table.append("tr").append("td");	
+	var row2 = table.append("tr").append("td");	
+
+	row1.append("img")
+			.attr("src", "imgs/indi1.png")
+			.attr("width", "80")
+			.attr("height", "80");
+
+	row1.append("img")
+			.attr("src", "imgs/indi2.png")
+			.attr("width", "80")
+			.attr("height", "80");
+
+	row1.append("img")
+			.attr("src", "imgs/indi3.png")
+			.attr("width", "80")
+			.attr("height", "80");
+
+	row2.append("img")
+			.attr("src", "imgs/indi4.png")
+			.attr("width", "80")
+			.attr("height", "80");
+
+	row2.append("img")
+			.attr("src", "imgs/indi5.png")
+			.attr("width", "80")
+			.attr("height", "80");
+
+	row2.append("img")
+			.attr("src", "imgs/indi6.png")
+			.attr("width", "80")
+			.attr("height", "80");
+
+
+}
+
+function draw_Group(clicked){
+
+	d3.select("#contents").selectAll(".child").remove();
+
+	var table = d3.select("#contents").append("table")
+				.attr("class", "child");
+
+	var menu = table.append("tr").append("td")
+				.attr("id", "menu");
 
 	menu.append("img")
 		.attr("src", "imgs/menu1_on.png");
 
 	menu.append("img")
-		.attr("src", "imgs/menu2_off.png");
+		.attr("src", "imgs/menu2_off.png")
+		.on("click", function() { draw_Individual(clicked); } );
 
 	var info = table.append("tr").append("td");
 
@@ -110,7 +167,8 @@ function draw_Group(clicked){
 	{
 		info.append("div")
 			.append("img")
-			.attr("src", "imgs/g1_off.png");
+			.attr("src", "imgs/g1_off.png")
+			.on("click", function(d) { console.log("group 1"); });
 
 		info.append("div")
 			.append("img")
@@ -136,7 +194,8 @@ function draw_Group(clicked){
 
 		info.append("div")
 			.append("img")
-			.attr("src", "imgs/g1_off.png");
+			.attr("src", "imgs/g1_off.png")
+			.on("click", function(d) { console.log("group 1"); });
 
 		info.append("div")
 			.append("img")
