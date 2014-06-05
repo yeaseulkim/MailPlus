@@ -51,7 +51,13 @@ td img
 
 #timeline {
 	max-width: 1040px;
+	height: 180px;
 	overflow: scroll;
+}
+
+#email_container {
+	max-height: 338px;
+	overflow-y: scroll;
 }
 
 .bargroup rect {

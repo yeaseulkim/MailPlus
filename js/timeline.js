@@ -1,9 +1,8 @@
 // JS for timeline view
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 1084 - margin.left - margin.right,
-    height = 170 - margin.top - margin.bottom,
-    initialoffset = -4000;
+    width = (1084 - margin.left - margin.right),
+    height = 170 - margin.top - margin.bottom;
 var columnwidth = 1.5;
 var domain1 = "12/02/12", domain2 = "05/05/14", 
     brush1 = "04/29/14", brush2 = "05/05/14";
@@ -49,6 +48,10 @@ function zoomed() {
   svg.selectAll(".bargroup rect")
     .attr("x", function(d) {return x(d.date) - width_scaled/2;})
     .attr("width", width_scaled);
+
+  // scale the svg
+  // d3.select("#timeline").select("svg")
+  //   .attr("width", margin.left + margin.right + width*d3.event.scale);
 
   // update the brush
   var extent = brush.extent();
@@ -112,8 +115,6 @@ function updateInbox() {
       // delete all children
       erase_threads_of_a_day(day_data.date);
     }
-
-    
     
   }
 
@@ -197,7 +198,7 @@ function erase_threads_of_a_day(date)
 
 }
 
-// var off = parseInt(initialoffset) + parseInt(margin.left);
+
 var svg = d3.select("#timeline").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -205,6 +206,7 @@ var svg = d3.select("#timeline").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .call(zoom)
     .on("mousedown.zoom", null);
+    
 
 
 svg.append("g")
