@@ -156,9 +156,11 @@ function render_threads_of_a_day(date, data)
       }
       else
       {
+        var r = j%8;
+        console.log(r);
         tr.append("td")
         .append("img")
-        .attr("src", "./imgs/background/background_03_06_01.gif");     
+        .attr("src", "./imgs/background/email" + r + ".png");
       }
       
 
